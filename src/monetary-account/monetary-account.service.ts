@@ -10,14 +10,14 @@ export class MonetaryAccountService {
     return await this.authService
       .getBunqClient()
       .then(async bunqclient => {
-        let accounts = await bunqclient.api.monetaryAccount.list(userId);
-        // console.log(accounts);
+        let accounts = await bunqclient.api.monetaryAccountBank.list(
+          userId.userId,
+        );
 
         return accounts;
       })
       .catch(error => {
         console.log(error.response.data);
-        
       });
 
     // return await this.authService.getBunqClient().then(async bunqClient => {
