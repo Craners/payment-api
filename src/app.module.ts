@@ -5,9 +5,18 @@ import { MonetaryAccountModule } from './monetary-account/monetary-account.modul
 import { ConfigModule } from './shared/config/config.module';
 import { BunqClientModule } from './bunq-client/bunq-client.module';
 import { PaymentsModule } from './payments/payments.module';
+import { UserModule } from './user/user.module';
+import { ExtraFieldsMonetaryAccountModule } from './schemas/extra-fields-monetary-account/extraFieldsMonetaryAccount.module';
 
 @Module({
-  imports: [ConfigModule, BunqClientModule, MonetaryAccountModule, PaymentsModule],
+  imports: [
+    ConfigModule,
+    BunqClientModule,
+    MonetaryAccountModule,
+    UserModule,
+    ExtraFieldsMonetaryAccountModule,
+    PaymentsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
