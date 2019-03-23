@@ -7,6 +7,7 @@ import { BunqClientModule } from './bunq-client/bunq-client.module';
 import { PaymentsModule } from './payments/payments.module';
 import { UserModule } from './user/user.module';
 import { ExtraFieldsMonetaryAccountModule } from './schemas/extra-fields-monetary-account/extraFieldsMonetaryAccount.module';
+import { FlowModule } from './flow/flow.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ExtraFieldsMonetaryAccountModule } from './schemas/extra-fields-monetar
     UserModule,
     ExtraFieldsMonetaryAccountModule,
     PaymentsModule,
+    FlowModule,
   ],
   controllers: [AppController],
   providers: [AppService],
