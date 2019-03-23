@@ -1,17 +1,6 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-
-declare type AmountValue = string;
-
-declare type Amount = {
-  value: AmountValue;
-  currency: string;
-};
-
-declare type CounterpartyAlias = {
-  type: string;
-  value: string;
-  name?: string;
-};
+import { CounterpartyAlias } from './counterPartyAlias.params';
+import { Amount } from './amount.params';
 
 export class PaymentParams {
   @ApiModelProperty()

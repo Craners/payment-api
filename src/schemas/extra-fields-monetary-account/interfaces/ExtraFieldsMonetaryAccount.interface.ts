@@ -5,4 +5,5 @@ export interface IExtraFieldsMonetaryAccount extends Document {
   readonly transactionLimit: string;
   readonly ownerId: string;
   readonly originalAccountId: string;
+  readonly expirationDate: Date;
 }

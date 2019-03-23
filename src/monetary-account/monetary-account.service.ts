@@ -1,42 +1,79 @@
-import { Injectable } from '@nestjs/common';
-import { UserIdParams } from 'src/shared/params/userId.params';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { MonetaryAccountPostParams } from 'src/shared/params/monetaryAccountPost.params';
 import { BunqClientService } from 'src/bunq-client/bunq-client.service';
 import { DeleteParams } from 'src/shared/params/delete.params';
+import { MonetaryAccountListParams } from 'src/shared/params/monetaryAccountList.params';
+import { MonetaryAccountGetParams } from 'src/shared/params/monetaryAccountGet.params';
 
 @Injectable()
 export class MonetaryAccountService {
   constructor(private readonly authService: BunqClientService) {}
 
-  async getMonetaryAccounts(userId: UserIdParams): Promise<any> {
+  async getMonetaryAccounts(
+    monetaryAccountListParams: MonetaryAccountListParams,
+  ): Promise<any> {
     return await this.authService
       .getBunqClient()
       .then(async bunqclient => {
         let accounts = await bunqclient.api.monetaryAccountBank.list(
-          userId.userId,
+          monetaryAccountListParams.userId,
         );
 
         return accounts;
       })
       .catch(error => {
         console.log(error.response.data);
+        throw new HttpException(
+          'Monetary-account list failed!',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       });
   }
 
-  async createMonetaryAccounts(userId: UserIdParams): Promise<any> {
+  async getMonetaryAccount(
+    monetaryAccountGetParams: MonetaryAccountGetParams,
+    monetaryAccountListParams: MonetaryAccountListParams,
+  ): Promise<any> {
+    return await this.authService
+      .getBunqClient()
+      .then(async bunqclient => {
+        let accounts = await bunqclient.api.monetaryAccountBank.get(
+          monetaryAccountListParams.userId,
+          monetaryAccountGetParams.accountId,
+        );
+
+        return accounts;
+      })
+      .catch(error => {
+        console.log(error.response.data);
+        throw new HttpException(
+          'Monetary-account get failed!',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      });
+  }
+
+  async createMonetaryAccounts(
+    monetaryAccountPostParams: MonetaryAccountPostParams,
+  ): Promise<any> {
     return await this.authService
       .getBunqClient()
       .then(async bunqclient => {
         let accounts = await bunqclient.api.monetaryAccountBank.post(
-          userId.userId,
-          userId.currency,
-          userId.description,
-          userId.dailyLimit,
-          userId.color,
+          monetaryAccountPostParams.userId,
+          monetaryAccountPostParams.currency,
+          monetaryAccountPostParams.description,
+          monetaryAccountPostParams.dailyLimit,
+          monetaryAccountPostParams.color,
         );
         return accounts;
       })
       .catch(error => {
         console.log(error.response.data);
+        throw new HttpException(
+          'Monetary-account post failed!',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       });
   }
 
@@ -59,6 +96,10 @@ export class MonetaryAccountService {
       })
       .catch(error => {
         console.log(error.response.data);
+        throw new HttpException(
+          'Monetary-account delete failed!',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       });
   }
 }

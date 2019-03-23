@@ -5,4 +5,5 @@ export const ExtraFieldsMonetaryAccountSchema = new mongoose.Schema({
   transactionLimit: { type: String, required: true },
   ownerId: { type: String, required: true },
   originalAccountId: { type: String, required: true },
+  expirationDate: { type: Date, required: true },
 });

@@ -9,4 +9,6 @@ export class ExtraFieldsMonetaryAccountDto {
   readonly ownerId: string;
   @ApiModelProperty()
   readonly originalAccountId: string;
+  @ApiModelProperty()
+  readonly expirationDate: Date;
 }

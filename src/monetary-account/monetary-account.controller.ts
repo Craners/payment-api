@@ -1,22 +1,44 @@
-import { Controller, Get, Query, Post, Body, Put } from '@nestjs/common';
+import { Controller, Get, Query, Post, Body, Put, Param } from '@nestjs/common';
 import { MonetaryAccountService } from './monetary-account.service';
-import { UserIdParams } from 'src/shared/params/userId.params';
+import { MonetaryAccountPostParams } from 'src/shared/params/monetaryAccountPost.params';
 import { DeleteParams } from 'src/shared/params/delete.params';
+import { MonetaryAccountListParams } from 'src/shared/params/monetaryAccountList.params';
+import { MonetaryAccountGetParams } from 'src/shared/params/monetaryAccountGet.params';
 
 @Controller('monetary-account')
 export class MonetaryAccountController {
   constructor(
     private readonly monetaryAccountService: MonetaryAccountService,
   ) {}
+  MonetaryAccountPostParams;
+
+  @Get(':accountId')
+  async getMonetaryAccount(
+    @Param() monetaryAccountGetParams: MonetaryAccountGetParams,
+    @Query() monetaryAccountListParams: MonetaryAccountListParams,
+  ): Promise<any> {
+    return await this.monetaryAccountService.getMonetaryAccount(
+      monetaryAccountGetParams,
+      monetaryAccountListParams,
+    );
+  }
 
   @Get()
-  async getMonetaryAccounts(@Query() userId: UserIdParams): Promise<any> {
-    return await this.monetaryAccountService.getMonetaryAccounts(userId);
+  async getMonetaryAccounts(
+    @Query() monetaryAccountGetParams: MonetaryAccountListParams,
+  ): Promise<any> {
+    return await this.monetaryAccountService.getMonetaryAccounts(
+      monetaryAccountGetParams,
+    );
   }
 
   @Post()
-  async postMonetaryAccounts(@Body() userId: UserIdParams): Promise<any> {
-    return await this.monetaryAccountService.createMonetaryAccounts(userId);
+  async postMonetaryAccounts(
+    @Body() monetaryAccountPostParams: MonetaryAccountPostParams,
+  ): Promise<any> {
+    return await this.monetaryAccountService.createMonetaryAccounts(
+      monetaryAccountPostParams,
+    );
   }
 
   @Put()
