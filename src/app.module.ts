@@ -8,6 +8,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { UserModule } from './user/user.module';
 import { ExtraFieldsMonetaryAccountModule } from './schemas/extra-fields-monetary-account/extraFieldsMonetaryAccount.module';
 import { ShareInviteBankInquiryModule } from './share-invite-bank-inquiry/share-invite-bank-inquiry.module';
+import { FlowModule } from './flow/flow.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ShareInviteBankInquiryModule } from './share-invite-bank-inquiry/share-
     ExtraFieldsMonetaryAccountModule,
     PaymentsModule,
     ShareInviteBankInquiryModule,
+    FlowModule,
   ],
   controllers: [AppController],
   providers: [AppService],
