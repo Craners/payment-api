@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { MonetaryAccountModule } from './monetary-account/monetary-account.module';
 import { ConfigModule } from './shared/config/config.module';
 import { BunqClientModule } from './bunq-client/bunq-client.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
-  imports: [ConfigModule, BunqClientModule, MonetaryAccountModule],
+  imports: [ConfigModule, BunqClientModule, MonetaryAccountModule, PaymentsModule],
   controllers: [AppController],
   providers: [AppService],
 })

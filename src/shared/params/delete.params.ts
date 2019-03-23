@@ -1,20 +1,18 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-declare type AmountValue = string;
-
-export class UserIdParams {
+export class DeleteParams {
   @ApiModelProperty()
   userId: number;
 
   @ApiModelProperty()
-  currency: string;
+  accountId: number;
 
   @ApiModelProperty()
-  description: string;
+  status: string;
 
   @ApiModelProperty()
-  dailyLimit: AmountValue;
+  sub_status: string;
 
   @ApiModelProperty()
-  color: string;
+  reason: string;
 }
