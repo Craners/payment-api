@@ -2,7 +2,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 
 declare type AmountValue = string;
 
-export class UserIdParams {
+export class MonetaryAccountPostParams {
   @ApiModelProperty()
   userId: number;
 
